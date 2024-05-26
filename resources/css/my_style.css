@@ -1,0 +1,36 @@
+ul{
+    display: flex;
+    justify-content:space-evenly;
+    list-style: none;
+    font-size: larger;
+    margin-top: 20px;
+}
+
+a{
+    color: black;
+    text-decoration: none;
+}
+
+a:hover{
+    color: blue;
+}
+
+
+
+.titolo_index{
+    text-align: center;
+    margin-top: 40px;
+}
+
+.list_articles{
+    text-align: center;
+    margin-top: 30px;
+    font-size: xx-large;
+}
+
+.chiSiamo{
+    margin: 20px;
+    font-size: 20px;
+}
+
+
