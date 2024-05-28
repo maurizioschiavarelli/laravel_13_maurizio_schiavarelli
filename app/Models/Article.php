@@ -20,5 +20,9 @@ class Article extends Model
 
     //dovremo creare le colonne fillabili
 
-    protected $fillable = ['title','body','cover']; //id non sara una colonna riempibile perche viene creato in utomatico e non potra essere modificato
+    protected $fillable = ['title','body','cover','author_id']; //id non sara una colonna riempibile perche viene creato in utomatico e non potra essere modificato
+
+    public function author(){
+        return $this->belongsTo(Author::class);
+    }
 }

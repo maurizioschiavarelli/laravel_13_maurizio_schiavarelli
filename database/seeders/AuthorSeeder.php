@@ -20,16 +20,16 @@ class AuthorSeeder extends Seeder
                 'surname' => 'Petrelli',
             ],
             [
-                'name' => 'Michele',
-                'surname' => 'Petrelli',
+                'name' => 'Mario',
+                'surname' => 'Petrulli',
             ],
             [
-                'name' => 'Michele',
-                'surname' => 'Petrelli',
+                'name' => 'Mirko',
+                'surname' => 'Gianno',
             ],
             [
-                'name' => 'Michele',
-                'surname' => 'Petrelli',
+                'name' => 'Marco',
+                'surname' => 'Gino',
             ],
         ];
 

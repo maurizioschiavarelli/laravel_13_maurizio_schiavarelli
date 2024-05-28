@@ -163,3 +163,5 @@ Route::post('articleStore',[PageController::class,'store'])->middleware(['auth',
 Route::get('/dashboard',[PageController::class, 'dashboard'])->name('dashboard');
 
 Route::resource('categories',CategoryController::class);
+
+Route::get('/article-by-author/{author}',[PageController::class,'articleByAuthor'])->name('article.byAuthor');

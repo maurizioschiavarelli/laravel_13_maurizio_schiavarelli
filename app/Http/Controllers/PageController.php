@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Author;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -41,7 +42,7 @@ class PageController extends Controller
 
 
             //$articles = Article::all();
-            $articles = Article::orderBy('created_at','DESC')->paginate(15);
+            $articles = Article::orderBy('created_at','DESC')->paginate(12);
 
             return view('articoli',compact('articles'));
 
@@ -76,44 +77,47 @@ class PageController extends Controller
 
     public function seeder(){
 
-        $articles = [
-            1=>['id'=> 1, 'title' => 'Articolo1', 'body' => 'lorem ipsum'],
-            2=>['id'=> 2, 'title' => 'Articolo2', 'body' => 'lorem ipsum'],
-            3=>['id'=> 3, 'title' => 'Articolo3', 'body' => 'lorem ipsum'],
-            4=>['id'=> 4, 'title' => 'Articolo4', 'body' => 'lorem ipsum'],
-        ];
+        // $articles = [
+        //     1=>['id'=> 1, 'title' => 'Articolo1', 'body' => 'lorem ipsum'],
+        //     2=>['id'=> 2, 'title' => 'Articolo2', 'body' => 'lorem ipsum'],
+        //     3=>['id'=> 3, 'title' => 'Articolo3', 'body' => 'lorem ipsum'],
+        //     4=>['id'=> 4, 'title' => 'Articolo4', 'body' => 'lorem ipsum'],
+        // ];
 
 
 
-        //dobbiamo spostare questi dati nella tabella , se ne occupera il model article
-        //per creare un record nella riga:
+        // //dobbiamo spostare questi dati nella tabella , se ne occupera il model article
+        // //per creare un record nella riga:
 
-        //modello che si interfaccia con la tabella
-        //nella classe del modello dovremo indicare le colonne fillabili
-        \App\Models\Article::create([
-            'id'=>1,
-            'title'=> '	articolo 1',
-            'body'=> 'lorem ipsum',
-        ]);
+        // //modello che si interfaccia con la tabella
+        // //nella classe del modello dovremo indicare le colonne fillabili
+        // \App\Models\Article::create([
+        //     'id'=>1,
+        //     'title'=> '	articolo 1',
+        //     'body'=> 'lorem ipsum',
+        // ]);
 
-        \App\Models\Article::create([
-            'id'=>2,
-            'title'=> '	articolo 2',
-            'body'=> 'lorem ipsum',
-        ]);
+        // \App\Models\Article::create([
+        //     'id'=>2,
+        //     'title'=> '	articolo 2',
+        //     'body'=> 'lorem ipsum',
+        // ]);
 
-        \App\Models\Article::create([
-            'id'=>3,
-            'title'=> '	articolo 3',
-            'body'=> 'lorem ipsum',
-        ]);
+        // \App\Models\Article::create([
+        //     'id'=>3,
+        //     'title'=> '	articolo 3',
+        //     'body'=> 'lorem ipsum',
+        // ]);
 
 
             return view('seeder');
     }
 
     public function create(){
-       return view('createArticles') ;
+
+        $authors = Author::all();
+
+       return view('createArticles',compact('authors')) ;
     }
 
     public function store(StoreArticleRequest $request){
@@ -151,7 +155,7 @@ class PageController extends Controller
         $article = Article::create([
             'title'=>$request->title,
             'body'=>$request->body,
-            //'cover'=>$path,
+            'author_id'=>$request->author_id,
         ]);
 
 
@@ -173,10 +177,16 @@ class PageController extends Controller
         return view('dashboard');
      }
 
+     public function articleByAuthor(Author $author){
+
+        $articles = $author->articles->sortByDesc('created_at');
+        //dd($articles);
+        return view('articoli',compact('articles'));
+     }
 
 }
 
 
 
 
-//per non richiamare gli articoli 2 volte nella vista articoli e articolo possiamo passarli come proprieta della classe e poi richiamre this->$articles
+

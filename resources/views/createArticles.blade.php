@@ -37,6 +37,8 @@
             @enderror
         </div>
 
+
+
         <div class="mb-3 mt-4">
             <label for="formFile" class="form-label">Inserisci immagine</label>
             <input class="form-control" type="file" name="cover">
@@ -46,7 +48,19 @@
             @enderror
         </div>
 
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <select class="form-select mt-4" name="author_id">
+            <option selected>Scegli autore</option>
+            @foreach ( $authors as $author )
+                <option value="{{$author->id}}">{{$author->name}} {{$author->surname}}</option>
+            @endforeach
+
+        </select>
+
+        @error('author_id')
+                <span class="small text-danger @error('title') is-invalid @enderror">{{ $message }}</span>
+            @enderror
+
+        <button type="submit" class="btn btn-primary mt-4">Submit</button>
 
     </form>
 

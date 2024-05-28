@@ -25,6 +25,7 @@ class StoreArticleRequest extends FormRequest
             'title' => 'required|max:50', //controlla input title
             'body' => 'required',
             'cover'=> 'mimes:jpg,bmp,png',
+            'author_id'=>'required|exists:authors,id',
         ];
     }
 
